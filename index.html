@@ -1,0 +1,2577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROXIQ TECH – AI SERVICES | Innovate. Automate. Elevate.</title>
+<meta name="description" content="PROXIQ TECH – Futuristic AI-powered technology company delivering premium software, AI automation, mobile apps, websites, and startup solutions.">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --black: #000000;
+  --dark: #020510;
+  --dark2: #050d1a;
+  --navy: #030a18;
+  --blue: #0066ff;
+  --blue2: #0044cc;
+  --cyan: #00d4ff;
+  --cyan2: #00aacc;
+  --neon: #00f5ff;
+  --glow: rgba(0,212,255,0.4);
+  --glow2: rgba(0,102,255,0.3);
+  --glass: rgba(0,20,50,0.4);
+  --glass2: rgba(0,212,255,0.05);
+  --border: rgba(0,212,255,0.2);
+  --border2: rgba(0,102,255,0.3);
+  --white: #ffffff;
+  --text: #b0c4d8;
+  --text2: #7a95b0;
+  --font-head: 'Orbitron', monospace;
+  --font-body: 'Rajdhani', sans-serif;
+  --font-alt: 'Exo 2', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; overflow-x: hidden; }
+
+body {
+  background: var(--dark);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
+
+/* ===== LOADER ===== */
+#loader {
+  position: fixed; inset: 0;
+  background: var(--black);
+  z-index: 9999;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity 0.8s, visibility 0.8s;
+}
+#loader.hide { opacity: 0; visibility: hidden; }
+.loader-logo {
+  font-family: var(--font-head);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 900;
+  background: linear-gradient(90deg, var(--blue), var(--cyan), var(--neon));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 3px;
+  margin-bottom: 40px;
+  animation: pulse-text 1.5s ease-in-out infinite;
+}
+@keyframes pulse-text { 0%,100%{opacity:0.7} 50%{opacity:1} }
+.loader-bar {
+  width: 300px; height: 3px;
+  background: rgba(0,212,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.loader-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--cyan), var(--neon));
+  border-radius: 3px;
+  animation: load 2.5s ease forwards;
+  box-shadow: 0 0 20px var(--cyan);
+}
+@keyframes load { 0%{width:0} 100%{width:100%} }
+.loader-text {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--cyan2);
+  letter-spacing: 4px;
+  margin-top: 20px;
+  animation: pulse-text 1s ease infinite;
+}
+
+/* ===== CUSTOM CURSOR ===== */
+.cursor {
+  position: fixed; width: 20px; height: 20px;
+  border: 1px solid var(--cyan);
+  border-radius: 50%; pointer-events: none;
+  z-index: 9998; transform: translate(-50%,-50%);
+  transition: all 0.1s ease;
+  mix-blend-mode: screen;
+}
+.cursor-dot {
+  position: fixed; width: 5px; height: 5px;
+  background: var(--cyan); border-radius: 50%;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: all 0.05s ease;
+}
+
+/* ===== NAVBAR ===== */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 5%;
+  background: rgba(0,5,16,0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 75px;
+}
+#navbar.scrolled {
+  background: rgba(0,5,16,0.92);
+  box-shadow: 0 0 30px rgba(0,212,255,0.1);
+}
+.nav-logo {
+  display: flex; flex-direction: column;
+  text-decoration: none;
+}
+.nav-logo-main {
+  font-family: var(--font-head);
+  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  font-weight: 900;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+.nav-logo-tag {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  color: var(--cyan2);
+  letter-spacing: 3px;
+  margin-top: 3px;
+}
+.nav-menu {
+  display: flex; align-items: center; gap: 5px;
+  list-style: none;
+}
+.nav-menu a {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  padding: 8px 14px;
+  letter-spacing: 1px;
+  position: relative;
+  transition: color 0.3s;
+}
+.nav-menu a::after {
+  content: '';
+  position: absolute; bottom: 4px; left: 14px; right: 14px;
+  height: 1px; background: var(--cyan);
+  transform: scaleX(0); transform-origin: right;
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 6px var(--cyan);
+}
+.nav-menu a:hover { color: var(--cyan); }
+.nav-menu a:hover::after { transform: scaleX(1); transform-origin: left; }
+.nav-btns {
+  display: flex; align-items: center; gap: 10px;
+}
+.btn-demo {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--dark);
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  padding: 9px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  border: none; cursor: pointer;
+  box-shadow: 0 0 20px rgba(0,212,255,0.3);
+}
+.btn-demo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(0,212,255,0.6);
+}
+.btn-wa {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--white);
+  background: rgba(37,211,102,0.15);
+  border: 1px solid rgba(37,211,102,0.4);
+  padding: 9px 18px;
+  border-radius: 4px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.btn-wa:hover {
+  background: rgba(37,211,102,0.25);
+  border-color: #25d366;
+  box-shadow: 0 0 20px rgba(37,211,102,0.3);
+  transform: translateY(-2px);
+}
+.btn-wa i { color: #25d366; font-size: 1rem; }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; z-index: 100; background: none; border: none;
+  padding: 5px;
+}
+.hamburger span {
+  display: block; width: 25px; height: 2px;
+  background: var(--cyan);
+  transition: all 0.3s;
+  border-radius: 2px;
+}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* Mobile Nav */
+.mobile-nav {
+  position: fixed; top: 75px; left: 0; right: 0; bottom: 0;
+  background: rgba(0,5,16,0.97);
+  backdrop-filter: blur(30px);
+  z-index: 999;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 25px;
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
+  border-top: 1px solid var(--border);
+}
+.mobile-nav.open { transform: translateX(0); }
+.mobile-nav a {
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 3px;
+  transition: color 0.3s;
+}
+.mobile-nav a:hover { color: var(--cyan); }
+.mobile-nav-btns { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
+
+/* ===== CANVAS ===== */
+#particles-canvas {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+
+/* ===== SECTIONS ===== */
+section { position: relative; z-index: 1; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 5%; }
+
+/* Section Titles */
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--cyan);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding: 5px 16px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--glass2);
+}
+.section-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.section-title span {
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--text);
+  max-width: 650px;
+  line-height: 1.7;
+}
+
+/* ===== HERO ===== */
+#home {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding-top: 75px;
+  overflow: hidden;
+  position: relative;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse 80% 70% at 70% 50%, rgba(0,102,255,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 60% at 20% 80%, rgba(0,212,255,0.06) 0%, transparent 50%),
+              linear-gradient(135deg, var(--dark) 0%, var(--navy) 100%);
+}
+.hero-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+}
+.hero-inner {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+  min-height: calc(100vh - 75px);
+  padding: 80px 5%;
+  max-width: 1280px; margin: 0 auto; width: 100%;
+}
+.hero-left { display: flex; flex-direction: column; gap: 24px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--cyan);
+  letter-spacing: 3px;
+  padding: 8px 18px;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  background: var(--glass2);
+  backdrop-filter: blur(10px);
+  width: fit-content;
+  animation: float 3s ease-in-out infinite;
+}
+.hero-badge::before { content:''; width:8px; height:8px; background:var(--cyan); border-radius:50%; animation: pulse-dot 1.5s ease infinite; }
+@keyframes pulse-dot { 0%,100%{box-shadow:0 0 0 0 rgba(0,212,255,0.5)} 50%{box-shadow:0 0 0 8px rgba(0,212,255,0)} }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 4.5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 1px;
+}
+.hero-title .line1 { color: var(--white); display: block; }
+.hero-title .line2 {
+  background: linear-gradient(90deg, var(--cyan), var(--blue), var(--neon));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; display: block;
+}
+.hero-title .line3 { color: var(--white); display: block; }
+.hero-sub {
+  font-family: var(--font-alt);
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: var(--cyan);
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.hero-desc {
+  font-size: 1.05rem; color: var(--text);
+  line-height: 1.8; max-width: 520px;
+}
+.hero-btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.95rem; font-weight: 700;
+  color: var(--dark);
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  padding: 13px 28px; border-radius: 4px;
+  text-decoration: none; border: none; cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  box-shadow: 0 0 30px rgba(0,212,255,0.3);
+  position: relative; overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(0,212,255,0.6); }
+.btn-primary:hover::before { left: 100%; }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.95rem; font-weight: 700;
+  color: var(--cyan);
+  background: transparent;
+  border: 1px solid var(--border2);
+  padding: 13px 28px; border-radius: 4px;
+  text-decoration: none; cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+}
+.btn-outline:hover {
+  background: rgba(0,212,255,0.08);
+  border-color: var(--cyan);
+  box-shadow: 0 0 25px rgba(0,212,255,0.2);
+  transform: translateY(-3px);
+}
+.hero-right {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  height: 550px;
+}
+/* AI Robot Visual */
+.robot-container {
+  position: relative; width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+.robot-glow {
+  position: absolute;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(0,212,255,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+@keyframes pulse-glow { 0%,100%{transform:scale(1);opacity:0.7} 50%{transform:scale(1.15);opacity:1} }
+.robot-svg-wrap {
+  position: relative; z-index: 2;
+  width: 320px; height: 400px;
+  animation: float 4s ease-in-out infinite;
+}
+/* Floating Cards */
+.float-card {
+  position: absolute; z-index: 3;
+  background: var(--glass);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 18px;
+  display: flex; align-items: center; gap: 10px;
+  white-space: nowrap;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 1px rgba(0,212,255,0.4) inset;
+}
+.float-card i { font-size: 1.2rem; color: var(--cyan); }
+.float-card span { font-size: 0.82rem; font-weight: 600; color: var(--white); letter-spacing: 1px; }
+.fc1 { top: 50px; left: -30px; animation: float 3s 0.5s ease-in-out infinite; }
+.fc2 { top: 120px; right: -40px; animation: float 3.5s 1s ease-in-out infinite; }
+.fc3 { bottom: 130px; left: -20px; animation: float 4s 0.2s ease-in-out infinite; }
+.fc4 { bottom: 60px; right: -20px; animation: float 3.2s 0.8s ease-in-out infinite; }
+
+/* Hero AI SVG Robot */
+.ai-robot {
+  width: 100%; height: 100%;
+}
+
+/* ===== STATS ===== */
+#stats {
+  padding: 80px 0;
+  background: linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+.stat-card {
+  background: var(--glass);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: default;
+}
+.stat-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  animation: shimmer 2s linear infinite;
+}
+@keyframes shimmer { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
+.stat-card:hover {
+  border-color: var(--cyan);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0,212,255,0.15), 0 0 30px rgba(0,212,255,0.1);
+}
+.stat-icon {
+  font-size: 2rem; color: var(--cyan);
+  margin-bottom: 12px;
+  filter: drop-shadow(0 0 10px var(--cyan));
+}
+.stat-num {
+  font-family: var(--font-head);
+  font-size: 2.2rem; font-weight: 900;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  line-height: 1;
+}
+.stat-label {
+  font-family: var(--font-body);
+  font-size: 0.88rem; font-weight: 600;
+  color: var(--text); letter-spacing: 1px;
+  margin-top: 6px; display: block;
+}
+
+/* ===== ABOUT ===== */
+#about {
+  padding: 100px 0;
+  background: var(--dark2);
+  position: relative;
+}
+.about-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.about-left { position: relative; }
+.about-visual {
+  position: relative;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px;
+  overflow: hidden;
+}
+.about-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(0,212,255,0.08), transparent 60%);
+}
+.about-deco {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.deco-card {
+  background: rgba(0,10,30,0.6);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s;
+}
+.deco-card:hover { border-color: var(--cyan); transform: scale(1.02); }
+.deco-card i { font-size: 1.8rem; color: var(--cyan); margin-bottom: 10px; display: block; }
+.deco-card p { font-size: 0.82rem; color: var(--text); font-weight: 600; letter-spacing: 1px; }
+.about-cards { display: flex; flex-direction: column; gap: 16px; margin-top: 40px; }
+.about-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex; gap: 18px; align-items: flex-start;
+  transition: all 0.3s;
+}
+.about-card:hover { border-color: var(--cyan); transform: translateX(6px); box-shadow: 0 0 30px rgba(0,212,255,0.1); }
+.about-card-icon {
+  width: 50px; height: 50px; min-width: 50px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,102,255,0.1));
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; color: var(--cyan);
+}
+.about-card h4 {
+  font-family: var(--font-head); font-size: 0.95rem;
+  color: var(--white); margin-bottom: 6px; letter-spacing: 1px;
+}
+.about-card p { font-size: 0.9rem; color: var(--text); line-height: 1.6; }
+
+/* ===== SERVICES ===== */
+#services {
+  padding: 100px 0;
+  background: var(--dark);
+}
+.services-header { text-align: center; margin-bottom: 60px; }
+.services-header .section-desc { max-width: 600px; margin: 0 auto; }
+.service-cats { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 40px; }
+.cat-btn {
+  font-family: var(--font-body);
+  font-size: 0.82rem; font-weight: 600;
+  color: var(--text);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  padding: 9px 20px; border-radius: 50px;
+  cursor: pointer; letter-spacing: 1px;
+  transition: all 0.3s;
+}
+.cat-btn.active, .cat-btn:hover {
+  color: var(--dark);
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  border-color: transparent;
+  box-shadow: 0 0 20px rgba(0,212,255,0.3);
+}
+.services-group { display: none; }
+.services-group.active { display: block; }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+.service-card {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 26px 22px;
+  transition: all 0.3s;
+  position: relative; overflow: hidden;
+  cursor: default;
+}
+.service-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  transform: scaleX(0); transition: transform 0.4s;
+}
+.service-card:hover::after { transform: scaleX(1); }
+.service-card:hover {
+  border-color: rgba(0,212,255,0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 30px rgba(0,212,255,0.08);
+  background: rgba(0,30,60,0.5);
+}
+.svc-icon {
+  width: 48px; height: 48px; border-radius: 10px;
+  background: linear-gradient(135deg, rgba(0,212,255,0.12), rgba(0,102,255,0.08));
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; color: var(--cyan);
+  margin-bottom: 16px;
+  transition: all 0.3s;
+}
+.service-card:hover .svc-icon {
+  background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,102,255,0.15));
+  box-shadow: 0 0 20px rgba(0,212,255,0.3);
+}
+.service-card h3 {
+  font-family: var(--font-alt);
+  font-size: 1rem; font-weight: 700;
+  color: var(--white); margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+.service-card p { font-size: 0.85rem; color: var(--text); line-height: 1.6; }
+.service-card .svc-arrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.8rem; color: var(--cyan);
+  margin-top: 14px; font-weight: 600;
+  letter-spacing: 1px;
+  opacity: 0; transform: translateX(-10px);
+  transition: all 0.3s;
+}
+.service-card:hover .svc-arrow { opacity: 1; transform: translateX(0); }
+
+/* ===== RESULTS ===== */
+#results {
+  padding: 100px 0;
+  background: var(--dark2);
+  position: relative;
+  overflow: hidden;
+}
+.results-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.result-bars { display: flex; flex-direction: column; gap: 24px; margin-top: 40px; }
+.result-bar-item {}
+.result-bar-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 8px;
+}
+.result-bar-top span { font-size: 0.9rem; font-weight: 600; color: var(--text); letter-spacing: 1px; }
+.result-bar-top strong { font-family: var(--font-head); font-size: 0.95rem; color: var(--cyan); }
+.result-bar-track {
+  height: 6px; background: rgba(0,212,255,0.08);
+  border-radius: 6px; overflow: hidden;
+  border: 1px solid rgba(0,212,255,0.1);
+}
+.result-bar-fill {
+  height: 100%; border-radius: 6px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  box-shadow: 0 0 10px rgba(0,212,255,0.4);
+  width: 0; transition: width 1.5s ease 0.3s;
+}
+.results-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.result-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px 22px;
+  text-align: center; transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+.result-card::before {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  transform: scaleX(0); transition: transform 0.4s;
+}
+.result-card:hover::before { transform: scaleX(1); }
+.result-card:hover { border-color: var(--cyan); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+.result-card .icon { font-size: 1.8rem; color: var(--cyan); margin-bottom: 10px; }
+.result-num {
+  font-family: var(--font-head);
+  font-size: 1.8rem; font-weight: 900;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.result-card p { font-size: 0.82rem; color: var(--text); letter-spacing: 1px; font-weight: 600; margin-top: 5px; }
+
+/* ===== PORTFOLIO ===== */
+#portfolio {
+  padding: 100px 0;
+  background: var(--dark);
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px; margin-top: 50px;
+}
+.portfolio-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s;
+  position: relative;
+}
+.portfolio-card:hover {
+  border-color: rgba(0,212,255,0.5);
+  transform: translateY(-10px);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.4), 0 0 40px rgba(0,212,255,0.1);
+}
+.portfolio-img {
+  height: 200px;
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.portfolio-img-bg {
+  position: absolute; inset: 0;
+  transition: transform 0.5s ease;
+}
+.portfolio-card:hover .portfolio-img-bg { transform: scale(1.05); }
+.portfolio-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,10,30,0.6);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s;
+}
+.portfolio-card:hover .portfolio-overlay { opacity: 1; }
+.portfolio-preview {
+  font-family: var(--font-body);
+  font-size: 0.85rem; font-weight: 700;
+  color: var(--dark);
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  padding: 10px 22px; border-radius: 4px;
+  letter-spacing: 1px; text-decoration: none;
+  transform: translateY(15px); opacity: 0;
+  transition: all 0.3s 0.1s;
+}
+.portfolio-card:hover .portfolio-preview { transform: translateY(0); opacity: 1; }
+.portfolio-mock-icon { font-size: 4rem; color: var(--cyan); opacity: 0.6; filter: drop-shadow(0 0 15px var(--cyan)); }
+.portfolio-info { padding: 22px; }
+.portfolio-tag {
+  font-size: 0.72rem; font-weight: 700;
+  color: var(--cyan); letter-spacing: 3px;
+  text-transform: uppercase; margin-bottom: 8px; display: block;
+}
+.portfolio-info h3 { font-family: var(--font-alt); font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+.portfolio-info p { font-size: 0.85rem; color: var(--text); line-height: 1.6; }
+.portfolio-tech { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.tech-pill {
+  font-size: 0.7rem; font-weight: 600;
+  padding: 3px 10px; border-radius: 50px;
+  background: rgba(0,212,255,0.08);
+  border: 1px solid var(--border);
+  color: var(--text2); letter-spacing: 0.5px;
+}
+/* Portfolio Live Demo Button */
+.portfolio-wa-btn {
+  display: flex; align-items: center; gap: 8px;
+  width: 100%; margin-top: 14px;
+  padding: 11px 18px; border-radius: 8px;
+  background: linear-gradient(135deg, rgba(37,211,102,0.12), rgba(18,140,78,0.08));
+  border: 1px solid rgba(37,211,102,0.35);
+  color: #25d366; font-family: var(--font-body);
+  font-size: 0.88rem; font-weight: 700;
+  letter-spacing: 1px; cursor: pointer;
+  transition: all 0.3s; justify-content: center;
+}
+.portfolio-wa-btn:hover {
+  background: linear-gradient(135deg, rgba(37,211,102,0.22), rgba(18,140,78,0.15));
+  border-color: #25d366;
+  box-shadow: 0 0 20px rgba(37,211,102,0.25);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+/* ===== REVIEWS ===== */
+#reviews {
+  padding: 100px 0;
+  background: var(--dark2);
+  overflow: hidden;
+  position: relative;
+}
+#reviews::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,102,255,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.reviews-header { text-align: center; margin-bottom: 20px; }
+.overall-rating {
+  display: inline-flex; align-items: center; gap: 16px;
+  background: var(--glass); border: 1px solid var(--border);
+  padding: 16px 32px; border-radius: 50px;
+  margin-top: 24px;
+  box-shadow: 0 0 40px rgba(0,212,255,0.08), inset 0 0 20px rgba(0,212,255,0.03);
+}
+.stars { color: #ffd700; font-size: 1.4rem; letter-spacing: 4px; filter: drop-shadow(0 0 6px rgba(255,215,0,0.5)); }
+.rating-text { font-family: var(--font-head); font-size: 1.3rem; font-weight: 900; color: var(--white); }
+.rating-sub { font-size: 0.78rem; color: var(--text); letter-spacing: 1.5px; }
+/* Review slider fade edges */
+.reviews-slider {
+  position: relative; overflow: hidden;
+  padding: 30px 0;
+}
+.reviews-slider::before, .reviews-slider::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2;
+  pointer-events: none;
+}
+.reviews-slider::before { left: 0; background: linear-gradient(90deg, var(--dark2), transparent); }
+.reviews-slider::after  { right: 0; background: linear-gradient(-90deg, var(--dark2), transparent); }
+.reviews-track {
+  display: flex; gap: 24px;
+  animation: slide-reviews 28s linear infinite;
+  width: max-content;
+}
+.reviews-track:hover { animation-play-state: paused; }
+@keyframes slide-reviews {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+/* ---- REVIEW CARD ---- */
+.review-card {
+  background: rgba(0,15,40,0.55);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(0,212,255,0.15);
+  border-radius: 20px;
+  padding: 28px 26px 24px;
+  min-width: 330px; max-width: 330px;
+  transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+/* Top neon glow line */
+.review-card::before {
+  content: '';
+  position: absolute; top: 0; left: 10%; right: 10%;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  border-radius: 2px;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+/* Big quote mark */
+.review-card::after {
+  content: '\201C';
+  position: absolute; bottom: 10px; right: 18px;
+  font-size: 6rem; color: rgba(0,212,255,0.05);
+  font-family: Georgia, serif; line-height: 1;
+  pointer-events: none;
+}
+.review-card:hover {
+  border-color: rgba(0,212,255,0.45);
+  box-shadow: 0 0 0 1px rgba(0,212,255,0.12),
+              0 8px 40px rgba(0,0,0,0.4),
+              0 0 50px rgba(0,212,255,0.1);
+  transform: translateY(-6px);
+}
+.review-card:hover::before { opacity: 1; }
+
+/* Company Logo Badge */
+.review-logo-wrap {
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+}
+.review-logo {
+  width: 64px; height: 64px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-size: 1.5rem; font-weight: 900;
+  color: var(--white);
+  position: relative;
+  border: 1.5px solid rgba(0,212,255,0.3);
+  box-shadow: 0 0 20px rgba(0,212,255,0.15), inset 0 0 15px rgba(0,0,0,0.4);
+  transition: box-shadow 0.3s, border-color 0.3s;
+  flex-shrink: 0;
+}
+.review-card:hover .review-logo {
+  box-shadow: 0 0 30px rgba(0,212,255,0.3), inset 0 0 15px rgba(0,0,0,0.4);
+  border-color: rgba(0,212,255,0.6);
+}
+/* individual brand colors */
+.logo-b { background: linear-gradient(135deg, #0033aa, #005fff); }
+.logo-j { background: linear-gradient(135deg, #6600cc, #0066ff); }
+.logo-t { background: linear-gradient(135deg, #995500, #cc8800); }
+.logo-h { background: linear-gradient(135deg, #006633, #00aa55); }
+.logo-s { background: linear-gradient(135deg, #990033, #cc0055); }
+
+/* Verified badge on logo */
+.review-logo .verified-badge {
+  position: absolute; bottom: -6px; right: -6px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: linear-gradient(135deg, #00d4ff, #0066ff);
+  border: 2px solid var(--dark2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.55rem; color: white;
+  box-shadow: 0 0 8px rgba(0,212,255,0.5);
+}
+
+.review-header { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 14px; gap: 4px; }
+.review-name {
+  font-family: var(--font-head); font-size: 0.85rem; font-weight: 700;
+  color: var(--white); letter-spacing: 1.5px; line-height: 1.2;
+}
+.review-role {
+  font-size: 0.72rem; color: var(--text2); letter-spacing: 1px;
+  font-family: var(--font-body); font-weight: 500;
+}
+.review-verified-row {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.7rem; color: var(--cyan); letter-spacing: 1px;
+  background: rgba(0,212,255,0.07);
+  border: 1px solid rgba(0,212,255,0.2);
+  border-radius: 50px; padding: 3px 10px;
+  margin-top: 4px;
+}
+.review-verified-row i { font-size: 0.65rem; }
+.review-divider {
+  height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,0.2), transparent);
+  margin: 12px 0;
+}
+.review-stars {
+  text-align: center;
+  color: #ffd700; font-size: 1rem; letter-spacing: 3px;
+  filter: drop-shadow(0 0 4px rgba(255,215,0,0.4));
+  margin-bottom: 10px;
+}
+.review-text {
+  font-size: 0.9rem; color: var(--text); line-height: 1.75;
+  font-style: italic; text-align: center;
+  position: relative; z-index: 1;
+}
+
+/* ===== CONTACT ===== */
+#contact {
+  padding: 100px 0;
+  background: var(--dark);
+  position: relative;
+}
+.contact-inner {
+  display: grid; grid-template-columns: 1fr 1.3fr;
+  gap: 70px; align-items: start;
+}
+.contact-info { display: flex; flex-direction: column; gap: 24px; }
+.contact-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 20px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.3s;
+}
+.contact-item:hover { border-color: var(--cyan); transform: translateX(5px); }
+.ci-icon {
+  width: 46px; height: 46px; min-width: 46px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(0,212,255,0.12), rgba(0,102,255,0.08));
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: var(--cyan);
+}
+.ci-text label { font-size: 0.75rem; color: var(--text2); letter-spacing: 2px; display: block; margin-bottom: 4px; }
+.ci-text a, .ci-text p { font-size: 1rem; font-weight: 600; color: var(--white); text-decoration: none; transition: color 0.3s; }
+.ci-text a:hover { color: var(--cyan); }
+.contact-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+.contact-form-wrap {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(15px);
+  position: relative; overflow: hidden;
+}
+.contact-form-wrap::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan), var(--blue));
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group.full { grid-column: 1/-1; }
+.form-group label {
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--text2); letter-spacing: 1.5px;
+}
+.form-group input, .form-group select, .form-group textarea {
+  background: rgba(0,10,30,0.6);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: var(--font-body); font-size: 0.95rem;
+  padding: 13px 16px;
+  outline: none; transition: all 0.3s;
+  width: 100%;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(0,212,255,0.08), 0 0 20px rgba(0,212,255,0.1);
+  background: rgba(0,20,50,0.7);
+}
+.form-group select option { background: #050d1a; }
+.form-group textarea { resize: vertical; min-height: 110px; }
+.form-submit {
+  width: 100%; margin-top: 8px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  font-family: var(--font-head); font-size: 0.95rem; font-weight: 700;
+  color: var(--dark);
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  border: none; border-radius: 8px;
+  padding: 15px; cursor: pointer; letter-spacing: 2px;
+  transition: all 0.3s;
+  box-shadow: 0 0 30px rgba(0,212,255,0.3);
+}
+.form-submit:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(0,212,255,0.5); }
+.form-success {
+  display: none; text-align: center; padding: 40px 20px;
+}
+.form-success i { font-size: 3rem; color: var(--cyan); margin-bottom: 16px; }
+.form-success h3 { font-family: var(--font-head); font-size: 1.2rem; margin-bottom: 8px; }
+.form-success p { color: var(--text); font-size: 0.95rem; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--border);
+  padding: 70px 0 30px;
+  position: relative; z-index: 1;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  gap: 50px; margin-bottom: 50px;
+}
+.footer-logo-main {
+  font-family: var(--font-head); font-size: 1.2rem; font-weight: 900;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; letter-spacing: 2px; margin-bottom: 6px;
+}
+.footer-logo-tag { font-size: 0.7rem; color: var(--cyan2); letter-spacing: 3px; margin-bottom: 16px; }
+.footer-desc { font-size: 0.9rem; color: var(--text); line-height: 1.7; margin-bottom: 20px; }
+.footer-socials { display: flex; gap: 12px; }
+.social-btn {
+  width: 40px; height: 40px; border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; color: var(--text);
+  font-size: 1rem; transition: all 0.3s;
+}
+.social-btn:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 15px rgba(0,212,255,0.2); transform: translateY(-3px); }
+.social-btn.wa:hover { border-color: #25d366; color: #25d366; box-shadow: 0 0 15px rgba(37,211,102,0.2); }
+.footer-col h4 {
+  font-family: var(--font-head); font-size: 0.85rem; font-weight: 700;
+  color: var(--white); letter-spacing: 2px; margin-bottom: 20px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border);
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a {
+  font-size: 0.88rem; color: var(--text);
+  text-decoration: none; transition: all 0.3s;
+  display: flex; align-items: center; gap: 6px;
+}
+.footer-links a::before { content: '›'; color: var(--cyan); font-size: 1.1rem; }
+.footer-links a:hover { color: var(--cyan); padding-left: 5px; }
+.footer-newsletter {}
+.newsletter-form { display: flex; gap: 0; margin-top: 12px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+.newsletter-form input {
+  flex: 1; padding: 11px 14px;
+  background: rgba(0,10,30,0.6); border: none; color: var(--white);
+  font-family: var(--font-body); font-size: 0.88rem; outline: none;
+}
+.newsletter-form button {
+  padding: 11px 18px; background: linear-gradient(135deg, var(--cyan), var(--blue));
+  border: none; cursor: pointer; color: var(--dark);
+  font-family: var(--font-body); font-weight: 700; font-size: 0.82rem;
+  transition: all 0.3s; letter-spacing: 1px;
+}
+.newsletter-form button:hover { opacity: 0.85; }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 15px;
+}
+.footer-copy { font-size: 0.85rem; color: var(--text2); letter-spacing: 1px; }
+.footer-tagline {
+  font-family: var(--font-head); font-size: 0.72rem;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; letter-spacing: 2px;
+}
+
+/* ===== FLOATING BUTTONS ===== */
+.floating-wa {
+  position: fixed; bottom: 30px; right: 30px; z-index: 800;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: #25d366;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; font-size: 1.8rem; color: white;
+  box-shadow: 0 0 0 0 rgba(37,211,102,0.4);
+  animation: wa-pulse 2s ease infinite;
+  transition: transform 0.3s;
+}
+.floating-wa:hover { transform: scale(1.1); }
+@keyframes wa-pulse { 0%{box-shadow:0 0 0 0 rgba(37,211,102,0.4)} 70%{box-shadow:0 0 0 15px rgba(37,211,102,0)} 100%{box-shadow:0 0 0 0 rgba(37,211,102,0)} }
+
+/* ===== AI CHATBOT ===== */
+.chatbot-toggle {
+  position: fixed; bottom: 100px; right: 30px; z-index: 800;
+  width: 55px; height: 55px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; color: var(--dark);
+  box-shadow: 0 0 30px rgba(0,212,255,0.4);
+  transition: all 0.3s;
+}
+.chatbot-toggle:hover { transform: scale(1.1); box-shadow: 0 0 50px rgba(0,212,255,0.6); }
+.chatbot-box {
+  position: fixed; bottom: 170px; right: 25px; z-index: 800;
+  width: 340px; height: 480px;
+  background: rgba(2,5,16,0.95);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  transform: scale(0) translateY(20px); transform-origin: bottom right;
+  opacity: 0; visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,212,255,0.1);
+}
+.chatbot-box.open { transform: scale(1) translateY(0); opacity: 1; visibility: visible; }
+.chat-header {
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(0,102,255,0.1));
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+}
+.chat-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: var(--dark); flex-shrink: 0;
+}
+.chat-title { font-family: var(--font-head); font-size: 0.88rem; color: var(--white); }
+.chat-status { font-size: 0.72rem; color: #4ade80; letter-spacing: 1px; display: flex; align-items: center; gap: 4px; }
+.chat-status::before { content:''; width:6px; height:6px; background:#4ade80; border-radius:50%; animation:pulse-dot 1.5s infinite; }
+.chat-close {
+  margin-left: auto; background: none; border: none; color: var(--text);
+  cursor: pointer; font-size: 1rem; padding: 4px; transition: color 0.2s;
+}
+.chat-close:hover { color: var(--white); }
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 16px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.chat-messages::-webkit-scrollbar { width: 3px; }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--border); }
+.msg {
+  max-width: 85%; padding: 10px 14px; border-radius: 12px;
+  font-size: 0.88rem; line-height: 1.5;
+}
+.msg.bot {
+  background: rgba(0,212,255,0.08); border: 1px solid var(--border);
+  color: var(--text); border-radius: 4px 12px 12px 12px;
+  align-self: flex-start;
+}
+.msg.user {
+  background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,102,255,0.15));
+  border: 1px solid rgba(0,212,255,0.2);
+  color: var(--white); border-radius: 12px 4px 12px 12px;
+  align-self: flex-end;
+}
+.chat-quick { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.quick-btn {
+  font-size: 0.75rem; padding: 5px 10px; border-radius: 50px;
+  background: rgba(0,212,255,0.06); border: 1px solid var(--border);
+  color: var(--cyan); cursor: pointer; transition: all 0.2s;
+}
+.quick-btn:hover { background: rgba(0,212,255,0.12); border-color: var(--cyan); }
+.chat-input-row {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  display: flex; gap: 8px; align-items: center;
+}
+.chat-input {
+  flex: 1; background: rgba(0,10,30,0.6); border: 1px solid var(--border);
+  border-radius: 20px; padding: 10px 14px;
+  color: var(--white); font-family: var(--font-body); font-size: 0.88rem;
+  outline: none; transition: border-color 0.2s;
+}
+.chat-input:focus { border-color: var(--cyan); }
+.chat-send {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--dark); font-size: 0.9rem;
+  flex-shrink: 0; transition: all 0.2s;
+}
+.chat-send:hover { transform: scale(1.1); }
+
+/* ===== SCROLL REVEAL ===== */
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.reveal.up { transform: translateY(40px); }
+.reveal.left { transform: translateX(-40px); }
+.reveal.right { transform: translateX(40px); }
+.reveal.visible { opacity: 1; transform: translate(0,0); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 60px 5%; }
+  .hero-right { height: 380px; }
+  .robot-glow { width: 280px; height: 280px; }
+  .robot-svg-wrap { width: 220px; height: 280px; }
+  .about-inner { grid-template-columns: 1fr; gap: 50px; }
+  .results-inner { grid-template-columns: 1fr; gap: 50px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 50px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+}
+@media (max-width: 768px) {
+  .nav-menu { display: none; }
+  .nav-btns { display: none; }
+  .hamburger { display: flex; }
+  .hero-title { font-size: clamp(1.5rem, 6vw, 2.5rem); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .form-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .results-cards { grid-template-columns: 1fr 1fr; }
+  .chatbot-box { width: 300px; right: 10px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .fc1, .fc2, .fc3, .fc4 { display: none; }
+}
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .hero-btns { flex-direction: column; }
+  .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+  .services-grid { grid-template-columns: 1fr; }
+  .results-cards { grid-template-columns: 1fr; }
+  .contact-form-wrap { padding: 24px 18px; }
+  #navbar { padding: 0 4%; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">PROXIQ TECH</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+  <div class="loader-text">INITIALIZING AI SYSTEMS...</div>
+</div>
+
+<!-- PARTICLES CANVAS -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <span class="nav-logo-main">PROXIQ TECH</span>
+    <span class="nav-logo-tag">Innovate. Automate. Elevate.</span>
+  </a>
+  <ul class="nav-menu">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-btns">
+    <a href="javascript:void(0)" onclick="bookDemo()" class="btn-demo">Book Live Demo</a>
+    <a href="https://wa.me/919638813094" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#home" onclick="closeMobile()">Home</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#portfolio" onclick="closeMobile()">Portfolio</a>
+  <a href="#results" onclick="closeMobile()">Results</a>
+  <a href="#reviews" onclick="closeMobile()">Reviews</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <div class="mobile-nav-btns">
+    <a href="javascript:void(0)" onclick="bookDemo();closeMobile()" class="btn-demo">Book Live Demo</a>
+    <a href="https://wa.me/919638813094" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp Chat</a>
+  </div>
+</div>
+
+<!-- ======================== HERO ======================== -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">AI POWERED SOLUTIONS • LIVE 24/7</div>
+      <h1 class="hero-title">
+        <span class="line1">YOUR VISION,</span>
+        <span class="line2">OUR TECH,</span>
+        <span class="line3">AI POWERED SOLUTIONS</span>
+      </h1>
+      <p class="hero-sub">We Build • We Automate • We Guide • We Grow Together</p>
+      <p class="hero-desc">PROXIQ TECH helps businesses grow using AI automation, software systems, websites, mobile apps, startup solutions, and futuristic digital transformation services.</p>
+      <div class="hero-btns">
+        <a href="javascript:void(0)" onclick="bookDemo()" class="btn-primary"><i class="fas fa-rocket"></i> Get Started</a>
+        <a href="javascript:void(0)" onclick="scheduleMeeting()" class="btn-outline"><i class="fas fa-calendar-alt"></i> Schedule Meeting</a>
+        <a href="https://wa.me/919638813094" target="_blank" class="btn-primary" style="background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 0 30px rgba(37,211,102,0.3)"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="robot-container">
+        <div class="robot-glow"></div>
+        <div class="robot-svg-wrap">
+          <!-- AI Robot SVG -->
+          <svg class="ai-robot" viewBox="0 0 300 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#0066ff" stop-opacity="0.6"/>
+              </linearGradient>
+              <linearGradient id="faceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#050d1a"/>
+                <stop offset="100%" stop-color="#030a18"/>
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="glow2">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <!-- Neck -->
+            <rect x="130" y="155" width="40" height="30" rx="5" fill="url(#bodyGrad)" opacity="0.7"/>
+            <!-- Shoulders -->
+            <rect x="30" y="185" width="240" height="20" rx="10" fill="url(#bodyGrad)" opacity="0.6"/>
+            <!-- Body -->
+            <rect x="55" y="200" width="190" height="140" rx="20" fill="url(#faceGrad)" stroke="url(#bodyGrad)" stroke-width="1.5"/>
+            <!-- Body Panel Lines -->
+            <line x1="150" y1="210" x2="150" y2="330" stroke="#00d4ff" stroke-width="0.5" stroke-opacity="0.4"/>
+            <line x1="55" y1="270" x2="245" y2="270" stroke="#00d4ff" stroke-width="0.5" stroke-opacity="0.4"/>
+            <!-- Core Circle -->
+            <circle cx="150" cy="265" r="30" fill="rgba(0,20,50,0.8)" stroke="#00d4ff" stroke-width="1" filter="url(#glow)"/>
+            <circle cx="150" cy="265" r="18" fill="rgba(0,102,255,0.2)" stroke="#00d4ff" stroke-width="1"/>
+            <circle cx="150" cy="265" r="8" fill="#00d4ff" opacity="0.9" filter="url(#glow)">
+              <animate attributeName="r" values="8;11;8" dur="2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Chest Display -->
+            <rect x="80" y="215" width="140" height="35" rx="6" fill="rgba(0,10,30,0.8)" stroke="#00d4ff" stroke-width="0.8" stroke-opacity="0.5"/>
+            <rect x="86" y="220" width="35" height="4" rx="2" fill="#00d4ff" opacity="0.7"/>
+            <rect x="86" y="228" width="55" height="4" rx="2" fill="#0066ff" opacity="0.5"/>
+            <rect x="86" y="236" width="45" height="4" rx="2" fill="#00d4ff" opacity="0.4"/>
+            <circle cx="187" cy="232" r="10" fill="rgba(0,102,255,0.1)" stroke="#00d4ff" stroke-width="0.8"/>
+            <circle cx="187" cy="232" r="4" fill="#00d4ff" opacity="0.8" filter="url(#glow2)"/>
+            <!-- Left Arm -->
+            <rect x="18" y="190" width="40" height="100" rx="15" fill="url(#faceGrad)" stroke="url(#bodyGrad)" stroke-width="1.5"/>
+            <rect x="10" y="285" width="50" height="40" rx="10" fill="url(#faceGrad)" stroke="url(#bodyGrad)" stroke-width="1.5"/>
+            <!-- Right Arm -->
+            <rect x="242" y="190" width="40" height="100" rx="15" fill="url(#faceGrad)" stroke="url(#bodyGrad)" stroke-width="1.5"/>
+            <rect x="240" y="285" width="50" height="40" rx="10" fill="url(#faceGrad)" stroke="url(#bodyGrad)" stroke-width="1.5"/>
+            <!-- Arm Joints -->
+            <circle cx="38" cy="190" r="8" fill="url(#bodyGrad)" opacity="0.8" filter="url(#glow2)"/>
+            <circle cx="262" cy="190" r="8" fill="url(#bodyGrad)" opacity="0.8" filter="url(#glow2)"/>
+            <!-- Legs -->
+            <rect x="82" y="335" width="60" height="40" rx="12" fill="url(#faceGrad)" stroke="url(#bodyGrad)" stroke-width="1.5"/>
+            <rect x="158" y="335" width="60" height="40" rx="12" fill="url(#faceGrad)" stroke="url(#bodyGrad)" stroke-width="1.5"/>
+            <!-- Feet -->
+            <rect x="74" y="368" width="72" height="12" rx="6" fill="url(#bodyGrad)" opacity="0.6"/>
+            <rect x="154" y="368" width="72" height="12" rx="6" fill="url(#bodyGrad)" opacity="0.6"/>
+            <!-- Head -->
+            <rect x="80" y="60" width="140" height="110" rx="22" fill="url(#faceGrad)" stroke="url(#bodyGrad)" stroke-width="2"/>
+            <!-- Head Antenna -->
+            <line x1="150" y1="60" x2="150" y2="30" stroke="#00d4ff" stroke-width="2"/>
+            <circle cx="150" cy="25" r="6" fill="#00d4ff" filter="url(#glow)">
+              <animate attributeName="opacity" values="1;0.2;1" dur="1.5s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Side Antennas -->
+            <line x1="80" y1="80" x2="55" y2="60" stroke="#00d4ff" stroke-width="1" opacity="0.6"/>
+            <circle cx="52" cy="57" r="4" fill="#00d4ff" opacity="0.6" filter="url(#glow2)">
+              <animate attributeName="opacity" values="0.6;0.1;0.6" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <line x1="220" y1="80" x2="245" y2="60" stroke="#00d4ff" stroke-width="1" opacity="0.6"/>
+            <circle cx="248" cy="57" r="4" fill="#00d4ff" opacity="0.6" filter="url(#glow2)">
+              <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Eyes -->
+            <rect x="100" y="90" width="38" height="22" rx="8" fill="rgba(0,10,30,0.8)" stroke="#00d4ff" stroke-width="1"/>
+            <rect x="162" y="90" width="38" height="22" rx="8" fill="rgba(0,10,30,0.8)" stroke="#00d4ff" stroke-width="1"/>
+            <!-- Eye Glow -->
+            <rect x="106" y="95" width="26" height="12" rx="4" fill="#00d4ff" opacity="0.9" filter="url(#glow)">
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="3s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="168" y="95" width="26" height="12" rx="4" fill="#00d4ff" opacity="0.9" filter="url(#glow)">
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="3s" repeatCount="indefinite"/>
+            </rect>
+            <!-- Mouth Display -->
+            <rect x="105" y="130" width="90" height="22" rx="8" fill="rgba(0,10,30,0.8)" stroke="#00d4ff" stroke-width="0.8" stroke-opacity="0.6"/>
+            <rect x="112" y="136" width="12" height="10" rx="2" fill="#00d4ff" opacity="0.8"/>
+            <rect x="128" y="136" width="8" height="10" rx="2" fill="#0066ff" opacity="0.6"/>
+            <rect x="140" y="136" width="16" height="10" rx="2" fill="#00d4ff" opacity="0.7"/>
+            <rect x="160" y="136" width="10" height="10" rx="2" fill="#0066ff" opacity="0.5"/>
+            <rect x="174" y="136" width="14" height="10" rx="2" fill="#00d4ff" opacity="0.8"/>
+            <!-- Head Top Details -->
+            <rect x="110" y="62" width="80" height="6" rx="3" fill="#00d4ff" opacity="0.3"/>
+            <!-- Ear Ports -->
+            <rect x="76" y="95" width="8" height="16" rx="4" fill="url(#bodyGrad)" opacity="0.8"/>
+            <rect x="216" y="95" width="8" height="16" rx="4" fill="url(#bodyGrad)" opacity="0.8"/>
+            <!-- Scan Line Animation -->
+            <rect x="80" y="60" width="140" height="2" fill="#00d4ff" opacity="0.15">
+              <animate attributeName="y" values="60;170;60" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.15;0;0.15" dur="3s" repeatCount="indefinite"/>
+            </rect>
+          </svg>
+        </div>
+        <!-- Floating Cards -->
+        <div class="float-card fc1"><i class="fas fa-brain"></i><span>AI Automation</span></div>
+        <div class="float-card fc2"><i class="fas fa-chart-line"></i><span>4.9★ Rating</span></div>
+        <div class="float-card fc3"><i class="fas fa-rocket"></i><span>100+ Projects</span></div>
+        <div class="float-card fc4"><i class="fas fa-headset"></i><span>24/7 Support</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== STATS ======================== -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card reveal up">
+        <div class="stat-icon"><i class="fas fa-users"></i></div>
+        <span class="stat-num" data-count="50">0</span>
+        <span class="stat-label">Satisfied Customers</span>
+      </div>
+      <div class="stat-card reveal up" style="transition-delay:0.1s">
+        <div class="stat-icon"><i class="fas fa-code"></i></div>
+        <span class="stat-num" data-count="100">0</span>
+        <span class="stat-label">Projects Delivered</span>
+      </div>
+      <div class="stat-card reveal up" style="transition-delay:0.2s">
+        <div class="stat-icon"><i class="fas fa-star"></i></div>
+        <span class="stat-num" data-val="4.9">0</span>
+        <span class="stat-label">Customer Rating</span>
+      </div>
+      <div class="stat-card reveal up" style="transition-delay:0.3s">
+        <div class="stat-icon"><i class="fas fa-headset"></i></div>
+        <span class="stat-num">24/7</span>
+        <span class="stat-label">Support Available</span>
+      </div>
+      <div class="stat-card reveal up" style="transition-delay:0.4s">
+        <div class="stat-icon"><i class="fas fa-handshake"></i></div>
+        <span class="stat-num">TRUSTED</span>
+        <span class="stat-label">Startup Partner</span>
+      </div>
+      <div class="stat-card reveal up" style="transition-delay:0.5s">
+        <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+        <span class="stat-num">FAST</span>
+        <span class="stat-label">Delivery System</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== ABOUT ======================== -->
+<section id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-left reveal left">
+        <div class="about-visual">
+          <div class="about-deco">
+            <div class="deco-card"><i class="fas fa-microchip"></i><p>AI Technology</p></div>
+            <div class="deco-card"><i class="fas fa-shield-alt"></i><p>Secure Systems</p></div>
+            <div class="deco-card"><i class="fas fa-globe"></i><p>Global Reach</p></div>
+            <div class="deco-card"><i class="fas fa-chart-bar"></i><p>Growth Focus</p></div>
+          </div>
+        </div>
+        <div class="about-cards">
+          <div class="about-card">
+            <div class="about-card-icon"><i class="fas fa-bullseye"></i></div>
+            <div>
+              <h4>OUR MISSION</h4>
+              <p>To empower businesses with cutting-edge AI automation, software, and digital transformation tools that drive real growth.</p>
+            </div>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon"><i class="fas fa-eye"></i></div>
+            <div>
+              <h4>OUR VISION</h4>
+              <p>To be India's most trusted AI technology company, delivering futuristic solutions for every industry and scale.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-right reveal right">
+        <div class="section-tag">WHO WE ARE</div>
+        <h2 class="section-title">Why Choose <span>PROXIQ TECH?</span></h2>
+        <p class="section-desc">PROXIQ TECH is a futuristic AI-powered technology company delivering premium software systems, AI automation, mobile apps, websites, startup solutions, marketing services, and business growth systems for startups, hospitals, shops, schools, clinics, and enterprises.</p>
+        <div style="display:flex;flex-direction:column;gap:18px;margin-top:36px">
+          <div style="display:flex;gap:14px;align-items:center;padding:16px;background:var(--glass);border:1px solid var(--border);border-radius:10px">
+            <i class="fas fa-check-circle" style="color:var(--cyan);font-size:1.3rem;min-width:20px"></i>
+            <span style="font-size:0.95rem;color:var(--text);font-weight:500">AI-first approach to every business challenge</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:16px;background:var(--glass);border:1px solid var(--border);border-radius:10px">
+            <i class="fas fa-check-circle" style="color:var(--cyan);font-size:1.3rem;min-width:20px"></i>
+            <span style="font-size:0.95rem;color:var(--text);font-weight:500">End-to-end delivery from idea to launch</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:16px;background:var(--glass);border:1px solid var(--border);border-radius:10px">
+            <i class="fas fa-check-circle" style="color:var(--cyan);font-size:1.3rem;min-width:20px"></i>
+            <span style="font-size:0.95rem;color:var(--text);font-weight:500">Premium UI/UX with cutting-edge technology stack</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:16px;background:var(--glass);border:1px solid var(--border);border-radius:10px">
+            <i class="fas fa-check-circle" style="color:var(--cyan);font-size:1.3rem;min-width:20px"></i>
+            <span style="font-size:0.95rem;color:var(--text);font-weight:500">Transparent pricing with zero hidden costs</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:16px;background:var(--glass);border:1px solid var(--border);border-radius:10px">
+            <i class="fas fa-check-circle" style="color:var(--cyan);font-size:1.3rem;min-width:20px"></i>
+            <span style="font-size:0.95rem;color:var(--text);font-weight:500">Dedicated 24/7 support with fast delivery</span>
+          </div>
+        </div>
+        <div style="margin-top:30px;display:flex;gap:15px;flex-wrap:wrap">
+          <a href="#contact" class="btn-primary"><i class="fas fa-rocket"></i> Start Your Project</a>
+          <a href="#portfolio" class="btn-outline"><i class="fas fa-eye"></i> View Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== SERVICES ======================== -->
+<section id="services">
+  <div class="container">
+    <div class="services-header reveal up">
+      <div class="section-tag">WHAT WE OFFER</div>
+      <h2 class="section-title">Our <span>Premium Services</span></h2>
+      <p class="section-desc">Comprehensive AI-powered solutions for every business need — from automation to full digital transformation.</p>
+    </div>
+
+    <div class="service-cats reveal up">
+      <button class="cat-btn active" onclick="showCat('ai')">🤖 AI & Automation</button>
+      <button class="cat-btn" onclick="showCat('software')">💻 Software Dev</button>
+      <button class="cat-btn" onclick="showCat('app')">📱 App Development</button>
+      <button class="cat-btn" onclick="showCat('web')">🌐 Web Development</button>
+      <button class="cat-btn" onclick="showCat('marketing')">📢 Digital Marketing</button>
+      <button class="cat-btn" onclick="showCat('graphics')">🎨 Graphics & Media</button>
+      <button class="cat-btn" onclick="showCat('startup')">🚀 Business & Startup</button>
+      <button class="cat-btn" onclick="showCat('edu')">📚 Education & Training</button>
+    </div>
+
+    <!-- AI & AUTOMATION -->
+    <div class="services-group active" id="grp-ai">
+      <div class="services-grid">
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-comments"></i></div><h3>AI Chatbot Development</h3><p>Intelligent conversational AI for customer support and sales automation.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-microphone"></i></div><h3>AI Voice Assistant</h3><p>Custom voice AI systems for hands-free business operations.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-phone-alt"></i></div><h3>AI Calling Agent</h3><p>Automated AI-powered calling systems for lead follow-up and support.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-headset"></i></div><h3>AI Customer Support</h3><p>24/7 intelligent support automation reducing response times dramatically.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-database"></i></div><h3>AI CRM Automation</h3><p>Smart CRM systems with AI-driven lead scoring and follow-up.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-cogs"></i></div><h3>AI Workflow Systems</h3><p>End-to-end business workflow automation powered by AI.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-cloud"></i></div><h3>AI SaaS Development</h3><p>Build scalable AI-powered SaaS platforms for any industry.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-bullhorn"></i></div><h3>AI Marketing Automation</h3><p>Automated marketing funnels driven by AI analytics and targeting.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-robot"></i></div><h3>AI Business Automation</h3><p>Full-scale AI automation transforming entire business operations.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-image"></i></div><h3>AI Image Generator</h3><p>Custom AI image generation tools for marketing and content creation.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-video"></i></div><h3>AI Video Generator</h3><p>Automated AI video production for ads, reels, and presentations.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-pen-fancy"></i></div><h3>AI Content Generator</h3><p>High-quality AI-written content for blogs, social media, and SEO.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-file-alt"></i></div><h3>AI Resume Builder</h3><p>AI-powered resume building and career document automation.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fab fa-whatsapp"></i></div><h3>WhatsApp Automation</h3><p>Automated WhatsApp messaging, campaigns, and customer journeys.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-funnel-dollar"></i></div><h3>AI Lead Generation</h3><p>AI systems that identify, qualify, and nurture high-value leads.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-envelope-open-text"></i></div><h3>AI Email Automation</h3><p>Smart email sequences and campaigns powered by AI personalization.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-user-tie"></i></div><h3>AI Virtual Assistant</h3><p>Custom AI assistants for scheduling, emails, and business tasks.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-reply-all"></i></div><h3>AI Smart Reply System</h3><p>AI-powered intelligent reply systems for fast customer engagement.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-chart-pie"></i></div><h3>AI Analytics Dashboard</h3><p>Real-time AI analytics dashboards with predictive insights.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-hospital"></i></div><h3>AI Healthcare Solutions</h3><p>AI automation for clinics, hospitals, and healthcare management.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-graduation-cap"></i></div><h3>AI Education Solutions</h3><p>Personalized AI learning systems for schools and coaching centers.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-tasks"></i></div><h3>AI Productivity Systems</h3><p>AI tools that boost team productivity and streamline operations.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+      </div>
+    </div>
+
+    <!-- SOFTWARE DEV -->
+    <div class="services-group" id="grp-software">
+      <div class="services-grid">
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-building"></i></div><h3>ERP Software</h3><p>Enterprise resource planning for complete business operations.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-users-cog"></i></div><h3>CRM Software</h3><p>Customer relationship management for sales and retention growth.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-receipt"></i></div><h3>Billing Software</h3><p>Automated billing and invoice management systems.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-cash-register"></i></div><h3>POS Software</h3><p>Point of sale systems for retail, restaurants, and shops.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-calculator"></i></div><h3>Accounting Software</h3><p>GST-ready accounting and financial management solutions.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-boxes"></i></div><h3>Inventory Management</h3><p>Smart stock tracking and inventory optimization systems.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-user-friends"></i></div><h3>HR Management Software</h3><p>Complete HR, payroll, and employee management platforms.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-tachometer-alt"></i></div><h3>Dashboard Systems</h3><p>Custom data dashboards with real-time analytics and reporting.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-school"></i></div><h3>School Management</h3><p>Complete school ERP with fees, attendance, and academics.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-hospital-alt"></i></div><h3>Hospital Management</h3><p>Full HMS for patient records, billing, and operations.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-clinic-medical"></i></div><h3>Clinic Management</h3><p>Appointment, billing, and patient management for clinics.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-pills"></i></div><h3>Pharmacy Software</h3><p>Drug inventory, billing, and prescription management systems.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-hotel"></i></div><h3>Hotel Management</h3><p>Reservation, billing, and housekeeping management platforms.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-utensils"></i></div><h3>Restaurant Management</h3><p>Table management, kitchen display, and online ordering systems.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-dumbbell"></i></div><h3>Gym Management</h3><p>Member management, attendance, and fee tracking systems.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-layer-group"></i></div><h3>SaaS Platform Dev</h3><p>Scalable multi-tenant SaaS platforms for any business model.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-plug"></i></div><h3>API Integration</h3><p>Third-party API connections for seamless system integration.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-shield-alt"></i></div><h3>Cybersecurity Solutions</h3><p>Data protection, encryption, and security audit systems.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+      </div>
+    </div>
+
+    <!-- APP DEV -->
+    <div class="services-group" id="grp-app">
+      <div class="services-grid">
+        <div class="service-card"><div class="svc-icon"><i class="fab fa-android"></i></div><h3>Android App Development</h3><p>Native Android apps with premium UI and smooth performance.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fab fa-apple"></i></div><h3>iOS App Development</h3><p>Native iOS apps for iPhone and iPad with Apple-grade quality.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-mobile-alt"></i></div><h3>Hybrid App Development</h3><p>Cross-platform apps running on both Android and iOS.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-rocket"></i></div><h3>Startup MVP Apps</h3><p>Fast MVP development to validate your startup idea quickly.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-brain"></i></div><h3>AI Mobile Apps</h3><p>AI-integrated mobile applications for smart user experiences.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-shopping-cart"></i></div><h3>E-commerce Apps</h3><p>Full-featured shopping apps with payment and logistics.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-truck"></i></div><h3>Delivery Apps</h3><p>On-demand delivery apps with real-time tracking and assignment.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-heartbeat"></i></div><h3>Healthcare Apps</h3><p>Patient apps, telemedicine, and health monitoring solutions.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-book-open"></i></div><h3>Education Apps</h3><p>Learning apps with video, quizzes, and progress tracking.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-briefcase"></i></div><h3>Business Apps</h3><p>Custom business apps for operations, HR, and management.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-calendar-check"></i></div><h3>Booking Apps</h3><p>Appointment and reservation apps for salons, clinics, hotels.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-wallet"></i></div><h3>Wallet Apps</h3><p>Digital wallet and payment apps with secure transaction flows.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-comment-dots"></i></div><h3>Chat Applications</h3><p>Real-time messaging apps with media, groups, and calls.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-play-circle"></i></div><h3>OTT Streaming Apps</h3><p>Video streaming platforms with subscription and content management.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+      </div>
+    </div>
+
+    <!-- WEB DEV -->
+    <div class="services-group" id="grp-web">
+      <div class="services-grid">
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-globe"></i></div><h3>Business Websites</h3><p>Professional business websites that convert visitors to customers.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-rocket"></i></div><h3>Startup Websites</h3><p>Investor-ready startup websites with modern design.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-brain"></i></div><h3>AI Websites</h3><p>Futuristic AI-integrated websites with smart features.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-building"></i></div><h3>Corporate Websites</h3><p>Enterprise-grade corporate websites with premium branding.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-shopping-bag"></i></div><h3>E-commerce Websites</h3><p>High-converting online stores with payment and inventory.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-hospital"></i></div><h3>Hospital Websites</h3><p>Appointment-ready hospital websites with doctor profiles.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-school"></i></div><h3>School Websites</h3><p>Academic websites with admissions, events, and gallery.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-user-circle"></i></div><h3>Portfolio Websites</h3><p>Stunning personal portfolio sites for professionals.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-bullseye"></i></div><h3>Landing Pages</h3><p>High-conversion landing pages for ads and campaigns.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-calendar-alt"></i></div><h3>Booking Websites</h3><p>Online booking platforms for services and appointments.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-columns"></i></div><h3>Dashboard Portals</h3><p>Admin and user dashboard portals with real-time data.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-cloud"></i></div><h3>SaaS Websites</h3><p>Software-as-a-service platforms with subscription models.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-search"></i></div><h3>SEO Optimized Websites</h3><p>Google-friendly websites built for organic search visibility.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-wrench"></i></div><h3>Website Maintenance</h3><p>Ongoing website updates, security, and performance care.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+      </div>
+    </div>
+
+    <!-- MARKETING -->
+    <div class="services-group" id="grp-marketing">
+      <div class="services-grid">
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-search"></i></div><h3>SEO Optimization</h3><p>Rank #1 on Google with our proven SEO strategies.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fab fa-google"></i></div><h3>Google Ads</h3><p>High-ROI Google advertising campaigns that drive conversions.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fab fa-facebook"></i></div><h3>Facebook Ads</h3><p>Targeted Facebook and Meta ad campaigns for lead generation.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fab fa-instagram"></i></div><h3>Instagram Marketing</h3><p>Brand growth and content strategies for Instagram.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-share-alt"></i></div><h3>Social Media Management</h3><p>Complete social media presence management and growth.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-paint-brush"></i></div><h3>Branding Strategy</h3><p>Full brand identity and positioning for market dominance.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-funnel-dollar"></i></div><h3>Lead Generation</h3><p>Multi-channel lead generation systems for consistent revenue.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-envelope"></i></div><h3>Email Marketing</h3><p>Personalized email campaigns with high open and conversion rates.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-pen-nib"></i></div><h3>Content Marketing</h3><p>Strategic content creation that attracts and converts audiences.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-chart-line"></i></div><h3>Growth Marketing</h3><p>Data-driven growth hacking strategies for rapid scaling.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-filter"></i></div><h3>Funnel Marketing</h3><p>High-converting sales funnels from awareness to purchase.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-robot"></i></div><h3>Marketing Automation</h3><p>AI-powered marketing automation for scalable campaigns.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+      </div>
+    </div>
+
+    <!-- GRAPHICS -->
+    <div class="services-group" id="grp-graphics">
+      <div class="services-grid">
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-paint-brush"></i></div><h3>Logo Design</h3><p>Iconic brand logos that communicate your identity instantly.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-id-card"></i></div><h3>Brand Identity Design</h3><p>Complete visual branding kits for consistent brand presence.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-desktop"></i></div><h3>UI/UX Design</h3><p>User-centered interface design for apps and websites.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-image"></i></div><h3>Poster Design</h3><p>Eye-catching poster designs for events and promotions.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-ad"></i></div><h3>Banner Design</h3><p>Professional banners for digital and print media.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fab fa-instagram"></i></div><h3>Social Media Design</h3><p>Consistent, engaging social media content templates.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fab fa-youtube"></i></div><h3>Thumbnail Design</h3><p>Click-worthy YouTube and video thumbnails that increase CTR.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-film"></i></div><h3>Video Editing</h3><p>Professional video editing for ads, reels, and YouTube.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-magic"></i></div><h3>Motion Graphics</h3><p>Animated graphics for intros, explainers, and brand videos.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-cube"></i></div><h3>3D Mockups</h3><p>Photorealistic 3D product and UI mockups for presentations.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-chart-bar"></i></div><h3>Presentation Design</h3><p>Stunning pitch decks and business presentations that impress.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+      </div>
+    </div>
+
+    <!-- STARTUP -->
+    <div class="services-group" id="grp-startup">
+      <div class="services-grid">
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-lightbulb"></i></div><h3>Startup Guidance</h3><p>Expert mentorship for founders from idea to product launch.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-money-bill-wave"></i></div><h3>Startup Funding Guidance</h3><p>Navigate funding rounds, investors, and grant opportunities.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-file-powerpoint"></i></div><h3>Investor Pitch Deck</h3><p>Compelling pitch decks that secure investor meetings and deals.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-chart-pie"></i></div><h3>Business Analysis</h3><p>Deep-dive business analysis to identify growth opportunities.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-binoculars"></i></div><h3>Market Research</h3><p>Competitive market intelligence to position your business right.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-store"></i></div><h3>Franchise Consulting</h3><p>Franchise expansion strategy and operational framework design.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-chart-line"></i></div><h3>Revenue Planning</h3><p>Financial modeling and revenue growth strategy development.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-chess"></i></div><h3>Growth Strategy</h3><p>Custom growth playbooks for sustainable business scaling.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-digital-tachograph"></i></div><h3>Digital Transformation</h3><p>Complete business digitalization from legacy to future-ready.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-handshake"></i></div><h3>Business Consultancy</h3><p>Expert business advisory for strategy, operations, and growth.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-user-plus"></i></div><h3>Customer Acquisition</h3><p>Proven customer acquisition strategies for rapid user growth.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="services-group" id="grp-edu">
+      <div class="services-grid">
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-code"></i></div><h3>Coding Classes</h3><p>Hands-on programming courses from beginner to advanced.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-brain"></i></div><h3>AI Workshops</h3><p>Practical AI and machine learning workshops for professionals.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-robot"></i></div><h3>Robotics Training</h3><p>Hands-on robotics and IoT training for students and engineers.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-graduation-cap"></i></div><h3>Internship Programs</h3><p>Real-world project internships with certification and placement.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-user-tie"></i></div><h3>Career Mentorship</h3><p>1-on-1 career mentoring from industry professionals.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-compass"></i></div><h3>Career Guidance</h3><p>Personalized career roadmaps for students and job seekers.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-laptop"></i></div><h3>Freelancing Guidance</h3><p>Start and scale your freelance career with expert coaching.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-star"></i></div><h3>Fiverr Training</h3><p>Optimize your Fiverr profile and gig for maximum orders.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-globe"></i></div><h3>Upwork Training</h3><p>Land high-paying Upwork contracts with winning proposals.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-microphone-alt"></i></div><h3>Spoken English Training</h3><p>Build professional English communication confidence.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-smile"></i></div><h3>Personality Development</h3><p>Soft skills, leadership, and professional presence training.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-file-alt"></i></div><h3>Resume Building</h3><p>ATS-optimized resumes that get shortlisted by top companies.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-comments"></i></div><h3>Interview Preparation</h3><p>Mock interviews and coaching for job placement success.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+        <div class="service-card"><div class="svc-icon"><i class="fas fa-flask"></i></div><h3>NEET-JEE Guidance</h3><p>Strategic study plans and mentoring for competitive exam success.</p><span class="svc-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== RESULTS ======================== -->
+<section id="results">
+  <div class="container">
+    <div class="results-inner">
+      <div class="reveal left">
+        <div class="section-tag">OUR IMPACT</div>
+        <h2 class="section-title">Results & <span>Achievements</span></h2>
+        <p class="section-desc">Real numbers that reflect our commitment to delivering exceptional outcomes for every client.</p>
+        <div class="result-bars">
+          <div class="result-bar-item">
+            <div class="result-bar-top"><span>Customer Satisfaction</span><strong>98%</strong></div>
+            <div class="result-bar-track"><div class="result-bar-fill" data-width="98"></div></div>
+          </div>
+          <div class="result-bar-item">
+            <div class="result-bar-top"><span>On-Time Delivery</span><strong>95%</strong></div>
+            <div class="result-bar-track"><div class="result-bar-fill" data-width="95"></div></div>
+          </div>
+          <div class="result-bar-item">
+            <div class="result-bar-top"><span>AI Integration Success</span><strong>100%</strong></div>
+            <div class="result-bar-track"><div class="result-bar-fill" data-width="100"></div></div>
+          </div>
+          <div class="result-bar-item">
+            <div class="result-bar-top"><span>Client Retention Rate</span><strong>90%</strong></div>
+            <div class="result-bar-track"><div class="result-bar-fill" data-width="90"></div></div>
+          </div>
+          <div class="result-bar-item">
+            <div class="result-bar-top"><span>Business Growth Average</span><strong>3x</strong></div>
+            <div class="result-bar-track"><div class="result-bar-fill" data-width="85"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="results-cards reveal right">
+        <div class="result-card">
+          <div class="icon"><i class="fas fa-code"></i></div>
+          <div class="result-num">100+</div>
+          <p>Projects Delivered</p>
+        </div>
+        <div class="result-card">
+          <div class="icon"><i class="fas fa-users"></i></div>
+          <div class="result-num">50+</div>
+          <p>Satisfied Customers</p>
+        </div>
+        <div class="result-card">
+          <div class="icon"><i class="fas fa-star"></i></div>
+          <div class="result-num">4.9★</div>
+          <p>Average Rating</p>
+        </div>
+        <div class="result-card">
+          <div class="icon"><i class="fas fa-bolt"></i></div>
+          <div class="result-num">FAST</div>
+          <p>Delivery System</p>
+        </div>
+        <div class="result-card">
+          <div class="icon"><i class="fas fa-handshake"></i></div>
+          <div class="result-num">AI</div>
+          <p>Powered Growth</p>
+        </div>
+        <div class="result-card">
+          <div class="icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="result-num">100%</div>
+          <p>Trusted Partner</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== PORTFOLIO ======================== -->
+<section id="portfolio">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:20px" class="reveal up">
+      <div class="section-tag">OUR WORK</div>
+      <h2 class="section-title">Premium <span>Portfolio</span></h2>
+      <p class="section-desc" style="margin:0 auto">Showcasing our finest projects — each built with precision, purpose, and premium design.</p>
+    </div>
+    <div class="portfolio-grid">
+
+      <!-- 1 -->
+      <div class="portfolio-card reveal up">
+        <div class="portfolio-img">
+          <div class="portfolio-img-bg" style="background:linear-gradient(135deg,rgba(0,102,255,0.2),rgba(0,212,255,0.1));width:100%;height:100%"></div>
+          <i class="fas fa-brain portfolio-mock-icon"></i>
+          <div class="portfolio-overlay">
+            <a href="javascript:void(0)" class="portfolio-preview" onclick="portfolioWA('AI Business Automation Platform','AI Software – React, Node.js, AI/ML, MongoDB')">🚀 Live Demo</a>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <span class="portfolio-tag">AI Software</span>
+          <h3>AI Business Automation Platform</h3>
+          <p>Full-stack AI automation platform with custom chatbots, analytics, and workflow integration.</p>
+          <div class="portfolio-tech"><span class="tech-pill">React</span><span class="tech-pill">Node.js</span><span class="tech-pill">AI/ML</span><span class="tech-pill">MongoDB</span></div>
+          <button class="portfolio-wa-btn" onclick="portfolioWA('AI Business Automation Platform','AI Software – React, Node.js, AI/ML, MongoDB')"><i class="fas fa-eye"></i> Book Live Demo</button>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="portfolio-card reveal up" style="transition-delay:0.1s">
+        <div class="portfolio-img">
+          <div class="portfolio-img-bg" style="background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(0,50,100,0.3));width:100%;height:100%"></div>
+          <i class="fas fa-hospital-alt portfolio-mock-icon"></i>
+          <div class="portfolio-overlay">
+            <a href="javascript:void(0)" class="portfolio-preview" onclick="portfolioWA('Hospital Management System','Healthcare – Python, Django, MySQL')">🚀 Live Demo</a>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <span class="portfolio-tag">Healthcare</span>
+          <h3>Hospital Management System</h3>
+          <p>Complete HMS with patient records, billing, appointment scheduling, and pharmacy management.</p>
+          <div class="portfolio-tech"><span class="tech-pill">Python</span><span class="tech-pill">Django</span><span class="tech-pill">MySQL</span></div>
+          <button class="portfolio-wa-btn" onclick="portfolioWA('Hospital Management System','Healthcare – Python, Django, MySQL')"><i class="fas fa-eye"></i> Book Live Demo</button>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="portfolio-card reveal up" style="transition-delay:0.2s">
+        <div class="portfolio-img">
+          <div class="portfolio-img-bg" style="background:linear-gradient(135deg,rgba(102,0,255,0.15),rgba(0,212,255,0.1));width:100%;height:100%"></div>
+          <i class="fas fa-tachometer-alt portfolio-mock-icon"></i>
+          <div class="portfolio-overlay">
+            <a href="javascript:void(0)" class="portfolio-preview" onclick="portfolioWA('ERP Analytics Dashboard','Enterprise – Next.js, Charts.js, PostgreSQL')">🚀 Live Demo</a>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <span class="portfolio-tag">Enterprise</span>
+          <h3>ERP Analytics Dashboard</h3>
+          <p>Real-time enterprise dashboard with inventory, HR, finance, and operations management modules.</p>
+          <div class="portfolio-tech"><span class="tech-pill">Next.js</span><span class="tech-pill">Charts.js</span><span class="tech-pill">PostgreSQL</span></div>
+          <button class="portfolio-wa-btn" onclick="portfolioWA('ERP Analytics Dashboard','Enterprise – Next.js, Charts.js, PostgreSQL')"><i class="fas fa-eye"></i> Book Live Demo</button>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="portfolio-card reveal up" style="transition-delay:0.3s">
+        <div class="portfolio-img">
+          <div class="portfolio-img-bg" style="background:linear-gradient(135deg,rgba(0,200,100,0.12),rgba(0,102,255,0.12));width:100%;height:100%"></div>
+          <i class="fas fa-mobile-alt portfolio-mock-icon"></i>
+          <div class="portfolio-overlay">
+            <a href="javascript:void(0)" class="portfolio-preview" onclick="portfolioWA('Startup MVP Mobile App','Mobile App – React Native, Firebase, Stripe')">🚀 Live Demo</a>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <span class="portfolio-tag">Mobile App</span>
+          <h3>Startup MVP Mobile App</h3>
+          <p>Cross-platform startup app with user authentication, payments, real-time chat, and analytics.</p>
+          <div class="portfolio-tech"><span class="tech-pill">React Native</span><span class="tech-pill">Firebase</span><span class="tech-pill">Stripe</span></div>
+          <button class="portfolio-wa-btn" onclick="portfolioWA('Startup MVP Mobile App','Mobile App – React Native, Firebase, Stripe')"><i class="fas fa-eye"></i> Book Live Demo</button>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="portfolio-card reveal up" style="transition-delay:0.4s">
+        <div class="portfolio-img">
+          <div class="portfolio-img-bg" style="background:linear-gradient(135deg,rgba(255,150,0,0.1),rgba(0,102,255,0.15));width:100%;height:100%"></div>
+          <i class="fas fa-comments portfolio-mock-icon"></i>
+          <div class="portfolio-overlay">
+            <a href="javascript:void(0)" class="portfolio-preview" onclick="portfolioWA('AI Customer Support Bot','AI Chatbot – Python, NLP, WhatsApp API')">🚀 Live Demo</a>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <span class="portfolio-tag">AI Chatbot</span>
+          <h3>AI Customer Support Bot</h3>
+          <p>Intelligent multilingual chatbot integrated with WhatsApp, web, and CRM for 24/7 support.</p>
+          <div class="portfolio-tech"><span class="tech-pill">Python</span><span class="tech-pill">NLP</span><span class="tech-pill">WhatsApp API</span></div>
+          <button class="portfolio-wa-btn" onclick="portfolioWA('AI Customer Support Bot','AI Chatbot – Python, NLP, WhatsApp API')"><i class="fas fa-eye"></i> Book Live Demo</button>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="portfolio-card reveal up" style="transition-delay:0.5s">
+        <div class="portfolio-img">
+          <div class="portfolio-img-bg" style="background:linear-gradient(135deg,rgba(255,0,100,0.1),rgba(0,212,255,0.12));width:100%;height:100%"></div>
+          <i class="fas fa-shopping-cart portfolio-mock-icon"></i>
+          <div class="portfolio-overlay">
+            <a href="javascript:void(0)" class="portfolio-preview" onclick="portfolioWA('E-commerce Platform','E-commerce – Next.js, Razorpay, MongoDB')">🚀 Live Demo</a>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <span class="portfolio-tag">E-commerce</span>
+          <h3>E-commerce Platform</h3>
+          <p>Full-featured online store with AI product recommendations, payment gateway, and inventory.</p>
+          <div class="portfolio-tech"><span class="tech-pill">Next.js</span><span class="tech-pill">Razorpay</span><span class="tech-pill">MongoDB</span></div>
+          <button class="portfolio-wa-btn" onclick="portfolioWA('E-commerce Platform','E-commerce – Next.js, Razorpay, MongoDB')"><i class="fas fa-eye"></i> Book Live Demo</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================== REVIEWS ======================== -->
+<section id="reviews">
+  <div class="container">
+    <div class="reviews-header reveal up">
+      <div class="section-tag">CLIENT TESTIMONIALS</div>
+      <h2 class="section-title">Trusted By <span>Businesses & Visionaries</span></h2>
+      <div class="overall-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-text">4.9 / 5</span>
+        <span class="rating-sub">Customer Reviews</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slider Row 1 – left to right -->
+  <div class="reviews-slider" style="margin-top:50px">
+    <div class="reviews-track" id="reviewsTrack">
+
+      <!-- BAXA STORE -->
+      <div class="review-card">
+        <div class="review-logo-wrap">
+          <div class="review-logo logo-b">B<span class="verified-badge"><i class="fas fa-check"></i></span></div>
+        </div>
+        <div class="review-header">
+          <div class="review-name">BAXA STORE</div>
+          <div class="review-role">Retail Business</div>
+          <div class="review-verified-row"><i class="fas fa-check-circle"></i> Verified Client</div>
+        </div>
+        <div class="review-divider"></div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"PROXIQ TECH created a modern business solution with excellent support and fast delivery."</p>
+      </div>
+
+      <!-- JUDWA SELECTION -->
+      <div class="review-card">
+        <div class="review-logo-wrap">
+          <div class="review-logo logo-j">J<span class="verified-badge"><i class="fas fa-check"></i></span></div>
+        </div>
+        <div class="review-header">
+          <div class="review-name">JUDWA SELECTION</div>
+          <div class="review-role">Fashion & Lifestyle Brand</div>
+          <div class="review-verified-row"><i class="fas fa-check-circle"></i> Verified Client</div>
+        </div>
+        <div class="review-divider"></div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Our website and branding design look premium and modern. Excellent experience."</p>
+      </div>
+
+      <!-- TAQWA JEWELLERY -->
+      <div class="review-card">
+        <div class="review-logo-wrap">
+          <div class="review-logo logo-t">T<span class="verified-badge"><i class="fas fa-check"></i></span></div>
+        </div>
+        <div class="review-header">
+          <div class="review-name">TAQWA JEWELLERY</div>
+          <div class="review-role">Jewellery & Gold Shop</div>
+          <div class="review-verified-row"><i class="fas fa-check-circle"></i> Verified Client</div>
+        </div>
+        <div class="review-divider"></div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Professional automation and digital solutions with premium UI design."</p>
+      </div>
+
+      <!-- HOFER HOSPITAL CLINIC -->
+      <div class="review-card">
+        <div class="review-logo-wrap">
+          <div class="review-logo logo-h">H<span class="verified-badge"><i class="fas fa-check"></i></span></div>
+        </div>
+        <div class="review-header">
+          <div class="review-name">HOFER HOSPITAL CLINIC</div>
+          <div class="review-role">Healthcare & Medical</div>
+          <div class="review-verified-row"><i class="fas fa-check-circle"></i> Verified Client</div>
+        </div>
+        <div class="review-divider"></div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Excellent hospital website and management system with responsive support."</p>
+      </div>
+
+      <!-- STARTUP FOUNDER -->
+      <div class="review-card">
+        <div class="review-logo-wrap">
+          <div class="review-logo logo-s">S<span class="verified-badge"><i class="fas fa-check"></i></span></div>
+        </div>
+        <div class="review-header">
+          <div class="review-name">STARTUP FOUNDER</div>
+          <div class="review-role">Tech Startup</div>
+          <div class="review-verified-row"><i class="fas fa-check-circle"></i> Verified Client</div>
+        </div>
+        <div class="review-divider"></div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"PROXIQ TECH helped us launch our MVP in record time. Truly the best AI tech partner!"</p>
+      </div>
+
+      <!-- ── Duplicate set for seamless infinite loop ── -->
+      <div class="review-card">
+        <div class="review-logo-wrap"><div class="review-logo logo-b">B<span class="verified-badge"><i class="fas fa-check"></i></span></div></div>
+        <div class="review-header"><div class="review-name">BAXA STORE</div><div class="review-role">Retail Business</div><div class="review-verified-row"><i class="fas fa-check-circle"></i> Verified Client</div></div>
+        <div class="review-divider"></div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"PROXIQ TECH created a modern business solution with excellent support and fast delivery."</p>
+      </div>
+      <div class="review-card">
+        <div class="review-logo-wrap"><div class="review-logo logo-j">J<span class="verified-badge"><i class="fas fa-check"></i></span></div></div>
+        <div class="review-header"><div class="review-name">JUDWA SELECTION</div><div class="review-role">Fashion & Lifestyle Brand</div><div class="review-verified-row"><i class="fas fa-check-circle"></i> Verified Client</div></div>
+        <div class="review-divider"></div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Our website and branding design look premium and modern. Excellent experience."</p>
+      </div>
+      <div class="review-card">
+        <div class="review-logo-wrap"><div class="review-logo logo-t">T<span class="verified-badge"><i class="fas fa-check"></i></span></div></div>
+        <div class="review-header"><div class="review-name">TAQWA JEWELLERY</div><div class="review-role">Jewellery & Gold Shop</div><div class="review-verified-row"><i class="fas fa-check-circle"></i> Verified Client</div></div>
+        <div class="review-divider"></div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Professional automation and digital solutions with premium UI design."</p>
+      </div>
+      <div class="review-card">
+        <div class="review-logo-wrap"><div class="review-logo logo-h">H<span class="verified-badge"><i class="fas fa-check"></i></span></div></div>
+        <div class="review-header"><div class="review-name">HOFER HOSPITAL CLINIC</div><div class="review-role">Healthcare & Medical</div><div class="review-verified-row"><i class="fas fa-check-circle"></i> Verified Client</div></div>
+        <div class="review-divider"></div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Excellent hospital website and management system with responsive support."</p>
+      </div>
+      <div class="review-card">
+        <div class="review-logo-wrap"><div class="review-logo logo-s">S<span class="verified-badge"><i class="fas fa-check"></i></span></div></div>
+        <div class="review-header"><div class="review-name">STARTUP FOUNDER</div><div class="review-role">Tech Startup</div><div class="review-verified-row"><i class="fas fa-check-circle"></i> Verified Client</div></div>
+        <div class="review-divider"></div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"PROXIQ TECH helped us launch our MVP in record time. Truly the best AI tech partner!"</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================== CONTACT ======================== -->
+<section id="contact">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:60px" class="reveal up">
+      <div class="section-tag">GET IN TOUCH</div>
+      <h2 class="section-title">Let's Build The <span>Future Together</span></h2>
+      <p class="section-desc" style="margin:0 auto">Ready to transform your business? Reach out and let's create something extraordinary.</p>
+    </div>
+    <div class="contact-inner">
+      <div class="contact-info reveal left">
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fas fa-phone"></i></div>
+          <div class="ci-text"><label>PHONE</label><a href="tel:+919638813094">+91 9638813094</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+          <div class="ci-text"><label>EMAIL</label><a href="mailto:proxiqtechai@gmail.com">proxiqtechai@gmail.com</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fab fa-instagram"></i></div>
+          <div class="ci-text"><label>INSTAGRAM</label><a href="https://www.instagram.com/proxiq_tech_ai" target="_blank">@proxiq_tech_ai</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fas fa-headset"></i></div>
+          <div class="ci-text"><label>SUPPORT</label><p>24/7 Available for Clients</p></div>
+        </div>
+        <div class="contact-actions">
+          <a href="https://wa.me/919638813094" target="_blank" class="btn-primary" style="background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 0 30px rgba(37,211,102,0.3);width:100%;justify-content:center">
+            <i class="fab fa-whatsapp"></i> WhatsApp Direct Chat
+          </a>
+          <a href="javascript:void(0)" onclick="scheduleMeeting()" class="btn-outline" style="width:100%;justify-content:center">
+            <i class="fas fa-video"></i> Book Zoom / Google Meet
+          </a>
+        </div>
+      </div>
+      <div class="contact-form-wrap reveal right">
+        <div id="contactForm">
+          <h3 style="font-family:var(--font-head);font-size:1.1rem;margin-bottom:6px;letter-spacing:1px">SEND INQUIRY</h3>
+          <p style="font-size:0.88rem;color:var(--text2);margin-bottom:24px;letter-spacing:0.5px">Fill the form and we'll respond within 2 hours.</p>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>FULL NAME</label>
+              <input type="text" placeholder="Your full name" id="fname">
+            </div>
+            <div class="form-group">
+              <label>BUSINESS NAME</label>
+              <input type="text" placeholder="Company name" id="bname">
+            </div>
+            <div class="form-group">
+              <label>MOBILE NUMBER</label>
+              <input type="tel" placeholder="+91 XXXXXXXXXX" id="mobile">
+            </div>
+            <div class="form-group">
+              <label>EMAIL ADDRESS</label>
+              <input type="email" placeholder="your@email.com" id="email">
+            </div>
+            <div class="form-group full">
+              <label>SERVICE NEEDED</label>
+              <select id="service">
+                <option value="">Select a service...</option>
+                <option>AI Chatbot Development</option>
+                <option>AI Business Automation</option>
+                <option>Website Development</option>
+                <option>Mobile App Development</option>
+                <option>Software Development</option>
+                <option>Digital Marketing</option>
+                <option>UI/UX Design</option>
+                <option>Startup Guidance</option>
+                <option>AI SaaS Development</option>
+                <option>Other Service</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label>MESSAGE</label>
+              <textarea placeholder="Tell us about your project, requirements, and goals..." id="message"></textarea>
+            </div>
+          </div>
+          <button class="form-submit" onclick="submitForm()">
+            <i class="fas fa-paper-plane"></i> SEND INQUIRY
+          </button>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <i class="fas fa-check-circle" style="filter:drop-shadow(0 0 20px var(--cyan))"></i>
+          <h3>Inquiry Sent Successfully!</h3>
+          <p>Thank you! Our team will contact you within 2 hours. Meanwhile, you can also reach us on WhatsApp.</p>
+          <a href="https://wa.me/919638813094" target="_blank" class="btn-primary" style="margin-top:20px;display:inline-flex">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FOOTER ======================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo-main">PROXIQ TECH</div>
+        <div class="footer-logo-tag">AI SERVICES</div>
+        <p class="footer-desc">Futuristic AI-powered technology company delivering premium software, automation, apps, and digital transformation for businesses of every scale.</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/proxiq_tech_ai" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/919638813094" target="_blank" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>QUICK LINKS</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>SERVICES</h4>
+        <ul class="footer-links">
+          <li><a href="#services">AI Automation</a></li>
+          <li><a href="#services">Software Dev</a></li>
+          <li><a href="#services">App Development</a></li>
+          <li><a href="#services">Web Development</a></li>
+          <li><a href="#services">Digital Marketing</a></li>
+          <li><a href="#services">UI/UX Design</a></li>
+          <li><a href="#services">Startup Services</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-newsletter">
+        <h4>CONTACT</h4>
+        <ul class="footer-links" style="margin-bottom:20px">
+          <li><a href="tel:+919638813094">+91 9638813094</a></li>
+          <li><a href="mailto:proxiqtechai@gmail.com">proxiqtechai@gmail.com</a></li>
+        </ul>
+        <h4>NEWSLETTER</h4>
+        <p style="font-size:0.85rem;color:var(--text2);margin-bottom:12px">Get AI insights & startup news.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Enter your email">
+          <button onclick="subscribeNewsletter(this)">SUBSCRIBE</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 PROXIQ TECH – AI SERVICES. All Rights Reserved.</p>
+      <p class="footer-tagline">AI Powered Solutions • Result Driven • Trusted By Visionaries</p>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919638813094" target="_blank" class="floating-wa" title="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- AI CHATBOT TOGGLE -->
+<button class="chatbot-toggle" id="chatToggle" title="AI Assistant">
+  <i class="fas fa-robot"></i>
+</button>
+
+<!-- AI CHATBOT BOX -->
+<div class="chatbot-box" id="chatBox">
+  <div class="chat-header">
+    <div class="chat-avatar"><i class="fas fa-robot"></i></div>
+    <div>
+      <div class="chat-title">PROXIQ AI Assistant</div>
+      <div class="chat-status">Online</div>
+    </div>
+    <button class="chat-close" id="chatClose"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="msg bot">
+      👋 Hello! I'm the PROXIQ AI Assistant. How can I help you today?
+      <div class="chat-quick">
+        <button class="quick-btn" onclick="quickMsg(this)">Our Services</button>
+        <button class="quick-btn" onclick="quickMsg(this)">Get Quote</button>
+        <button class="quick-btn" onclick="quickMsg(this)">Book Demo</button>
+        <button class="quick-btn" onclick="quickMsg(this)">Contact Us</button>
+      </div>
+    </div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter')sendChat()">
+    <button class="chat-send" onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<script>
+// ===== LOADER =====
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hide');
+  }, 2800);
+});
+
+// ===== CUSTOM CURSOR =====
+const cursor = document.getElementById('cursor');
+const cursorDot = document.getElementById('cursorDot');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  cursorDot.style.left = e.clientX + 'px';
+  cursorDot.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button, .service-card, .stat-card').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%,-50%) scale(2.5)');
+  el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%,-50%) scale(1)');
+});
+
+// ===== NAVBAR =====
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileNav.classList.toggle('open');
+});
+function closeMobile() {
+  hamburger.classList.remove('active');
+  mobileNav.classList.remove('open');
+}
+
+// ===== PARTICLES CANVAS =====
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 1.5 + 0.3;
+    this.speedX = (Math.random() - 0.5) * 0.4;
+    this.speedY = (Math.random() - 0.5) * 0.4;
+    this.opacity = Math.random() * 0.5 + 0.1;
+    this.color = Math.random() > 0.6 ? '#00d4ff' : '#0066ff';
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
+    ctx.fillStyle = this.color;
+    ctx.shadowBlur = 6;
+    ctx.shadowColor = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  // Draw connections
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 100) {
+        ctx.save();
+        ctx.globalAlpha = (1 - dist / 100) * 0.08;
+        ctx.strokeStyle = '#00d4ff';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+  }
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ===== SERVICES TABS =====
+const catMap = {
+  ai: 'grp-ai', software: 'grp-software', app: 'grp-app',
+  web: 'grp-web', marketing: 'grp-marketing', graphics: 'grp-graphics',
+  startup: 'grp-startup', edu: 'grp-edu'
+};
+function showCat(cat) {
+  document.querySelectorAll('.services-group').forEach(g => g.classList.remove('active'));
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('grp-' + cat).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== SCROLL REVEAL =====
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+reveals.forEach(r => revealObserver.observe(r));
+
+// ===== COUNTER ANIMATION =====
+const counters = document.querySelectorAll('.stat-num[data-count]');
+const counterObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const target = parseInt(entry.target.dataset.count);
+      const suffix = entry.target.dataset.count >= 100 ? '+' : '+';
+      let current = 0;
+      const step = target / 60;
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(timer); }
+        entry.target.textContent = Math.floor(current) + '+';
+      }, 25);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObserver.observe(c));
+
+// Rating counter
+const ratingEl = document.querySelector('.stat-num[data-val]');
+if (ratingEl) {
+  const ratingObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      let val = 0; const target = 4.9;
+      const t = setInterval(() => {
+        val += 0.1;
+        if (val >= target) { val = target; clearInterval(t); }
+        ratingEl.textContent = val.toFixed(1) + '/5';
+      }, 40);
+      ratingObs.unobserve(ratingEl);
+    }
+  }, { threshold: 0.5 });
+  ratingObs.observe(ratingEl);
+}
+
+// ===== RESULT BARS =====
+const bars = document.querySelectorAll('.result-bar-fill');
+const barObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.width = entry.target.dataset.width + '%';
+      barObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+bars.forEach(b => barObserver.observe(b));
+
+// ===== FORM SUBMIT =====
+function submitForm() {
+  const fname = document.getElementById('fname').value.trim();
+  const mobile = document.getElementById('mobile').value.trim();
+  const service = document.getElementById('service').value;
+  if (!fname || !mobile || !service) {
+    alert('Please fill in all required fields (Name, Mobile, and Service).');
+    return;
+  }
+  const msg = `Hello PROXIQ TECH!%0A%0AName: ${encodeURIComponent(fname)}%0ABusiness: ${encodeURIComponent(document.getElementById('bname').value)}%0AMobile: ${encodeURIComponent(mobile)}%0AEmail: ${encodeURIComponent(document.getElementById('email').value)}%0AService: ${encodeURIComponent(service)}%0AMessage: ${encodeURIComponent(document.getElementById('message').value)}`;
+  window.open(`https://wa.me/919638813094?text=${msg}`, '_blank');
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+
+// ===== NEWSLETTER =====
+function subscribeNewsletter(btn) {
+  const input = btn.previousElementSibling;
+  if (!input.value || !input.value.includes('@')) { alert('Please enter a valid email.'); return; }
+  btn.textContent = '✓ JOINED';
+  btn.style.background = 'linear-gradient(135deg,#25d366,#128c7e)';
+  input.value = '';
+  setTimeout(() => { btn.textContent = 'SUBSCRIBE'; btn.style.background = ''; }, 3000);
+}
+
+// ===== CHATBOT =====
+const chatToggle = document.getElementById('chatToggle');
+const chatBox = document.getElementById('chatBox');
+const chatClose = document.getElementById('chatClose');
+chatToggle.addEventListener('click', () => chatBox.classList.toggle('open'));
+chatClose.addEventListener('click', () => chatBox.classList.remove('open'));
+
+const botReplies = {
+  'services': "We offer 100+ services including:\n🤖 AI Automation\n💻 Software Development\n📱 App Development\n🌐 Web Development\n📢 Digital Marketing\n🎨 Design & Media\n🚀 Startup Services\n\nWhich one interests you?",
+  'quote': "I'll connect you with our team for a custom quote!\n\nPlease share:\n• Your project name\n• Budget range\n• Timeline\n\nOr chat directly on WhatsApp: +91 9638813094",
+  'demo': "Book a FREE Live Demo! 🚀\n\n📞 Call: +91 9638813094\n📧 Email: proxiqtechai@gmail.com\n💬 WhatsApp: +91 9638813094\n\nWe're available 24/7!",
+  'contact': "📞 Phone: +91 9638813094\n📧 Email: proxiqtechai@gmail.com\n📱 WhatsApp: +91 9638813094\n📸 Instagram: @proxiq_tech_ai\n\nWe respond within 2 hours!",
+  'default': "Thanks for reaching out! Our team will be happy to assist you.\n\n💬 For instant support, WhatsApp us at +91 9638813094\n\nOr call: +91 9638813094"
+};
+
+function quickMsg(btn) {
+  const text = btn.textContent.trim();
+  appendMsg(text, 'user');
+  btn.parentElement.parentElement.querySelectorAll('.quick-btn').forEach(b => b.disabled = true);
+  setTimeout(() => {
+    const key = text.toLowerCase().replace(/\s/g,'');
+    const reply = botReplies[key] || botReplies.default;
+    appendMsg(reply, 'bot');
+  }, 700);
+}
+
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  appendMsg(text, 'user');
+  input.value = '';
+  setTimeout(() => {
+    const lower = text.toLowerCase();
+    let reply = botReplies.default;
+    if (lower.includes('service') || lower.includes('offer') || lower.includes('what do')) reply = botReplies['services'];
+    else if (lower.includes('quote') || lower.includes('price') || lower.includes('cost')) reply = botReplies['quote'];
+    else if (lower.includes('demo') || lower.includes('book') || lower.includes('meet')) reply = botReplies['demo'];
+    else if (lower.includes('contact') || lower.includes('number') || lower.includes('email') || lower.includes('reach')) reply = botReplies['contact'];
+    else if (lower.includes('hi') || lower.includes('hello') || lower.includes('hey')) reply = "Hello! 👋 Welcome to PROXIQ TECH!\n\nI'm your AI assistant. How can I help you build your future today?";
+    appendMsg(reply, 'bot');
+  }, 800);
+}
+
+function appendMsg(text, type) {
+  const div = document.createElement('div');
+  div.className = 'msg ' + type;
+  div.textContent = text;
+  div.style.whiteSpace = 'pre-wrap';
+  const msgs = document.getElementById('chatMessages');
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+// ===== PORTFOLIO → WHATSAPP =====
+function portfolioWA(projectName, stack) {
+  const msg = `Hello PROXIQ TECH! 👋%0A%0AI saw your *${projectName}* in the Portfolio and I'm interested in a *Live Demo* or similar project.%0A%0A🔧 Tech Stack: ${stack}%0A%0APlease share more details and let's schedule a meeting. Thank you!`;
+  window.open(`https://wa.me/919638813094?text=${msg}`, '_blank');
+}
+
+// ===== BOOK LIVE DEMO → WHATSAPP =====
+function bookDemo() {
+  const msg = `Hello PROXIQ TECH! 👋%0A%0AI would like to *Book a Live Demo* to explore your AI-powered services and solutions.%0A%0APlease let me know the available time slots for a meeting (Zoom / Google Meet / WhatsApp Call).%0A%0AThank you!`;
+  window.open(`https://wa.me/919638813094?text=${msg}`, '_blank');
+}
+
+// ===== SCHEDULE MEETING → WHATSAPP =====
+function scheduleMeeting() {
+  const msg = `Hello PROXIQ TECH! 👋%0A%0AI would like to *Schedule a Meeting* with your team to discuss my project requirements.%0A%0APlease suggest a convenient time for a Zoom or Google Meet call.%0A%0AThank you!`;
+  window.open(`https://wa.me/919638813094?text=${msg}`, '_blank');
+}
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+
+// Active nav link highlight
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section[id]');
+  const scrollY = window.scrollY + 100;
+  sections.forEach(sec => {
+    const top = sec.offsetTop;
+    const height = sec.offsetHeight;
+    const id = sec.getAttribute('id');
+    const link = document.querySelector(`.nav-menu a[href="#${id}"]`);
+    if (link) {
+      if (scrollY >= top && scrollY < top + height) link.style.color = 'var(--cyan)';
+      else link.style.color = '';
+    }
+  });
+});
+</script>
+</body>
+</html>
